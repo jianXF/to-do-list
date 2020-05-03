@@ -1,8 +1,8 @@
 const path = require('path');
+const TsImportPlugin = require('ts-import-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
-
 
 const PostCSSOptions = {
     plugins: () => [
@@ -12,26 +12,42 @@ const PostCSSOptions = {
     ]
 };
 module.exports = {
-    entry: {
-        app: ['babel-polyfill',  path.join(__dirname, 'src/App.ts')],
-        vendor: ['react', 'react-dom']
-    },
+    entry: path.join(__dirname, 'app/web/index.tsx'),
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'js/[name].bundle.js'
+        path: path.resolve(__dirname, 'app/public/dist/'),
+        publicPath: '/public/dist/',
+        filename: '[name].js',
+        chunkFilename: '[id].js'
     },
-    devtool: "source-map",
     resolve: {
-        extensions: [".ts", ".tsx", ".js", ".jsx", ".json",".less",".css"],
+        extensions: [".ts", ".tsx", ".js", ".json", ".less", ".css"],
         modules: [
-            'node_modules'
+            'node_modules',
+            path.join(__dirname, 'app/web'),
+            path.join(__dirname, 'app/')
         ]
     },
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
-                loader: "awesome-typescript-loader"
+                test: /\.(ts|tsx)$/,
+                exclude: /node_modules/,
+                use: [
+                    {
+                        loader: 'ts-loader',
+                        options: {
+                            transpileOnly: true,
+                            getCustomTransformers: () => ({
+                                before: [
+                                    TsImportPlugin()
+                                ]
+                            }),
+                            compilerOptions: {
+                                module: 'es2015'
+                            }
+                        }
+                    },
+                ],
             },
             {
                 test: /\.less$/,
@@ -60,25 +76,24 @@ module.exports = {
                 use: ['url-loader']
             },
             {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ["es2015","react"]
-                    }
-                }
+                test: /\.(eot|ttf|woff|woff2)$/,
+                use: 'url-loader'
             }
         ]
     },
 
     plugins: [
         new MiniCssExtractPlugin({
-            filename:   '[name].css',
+            filename: '[name].css',
             chunkFilename: '[id].css'
         }),
         new HtmlWebPackPlugin({
-            template: "./src/index.html"
+            template: path.join(__dirname, 'app/view/index.nj'),
+            filename: path.join(__dirname, 'app/view/index.html'),
+            minify: {
+                collapseWhitespace: true
+            },
+            chunks: ['index']
         })
     ]
 };
