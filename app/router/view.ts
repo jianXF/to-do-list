@@ -9,6 +9,5 @@ import { Application } from 'egg';
 
 export default (app: Application) => {
     const { router, controller } = app;
-    console.log(app.config,'2734982793');
     router.get('*', controller.view.index);
 };

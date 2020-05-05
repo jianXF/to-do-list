@@ -1,4 +1,4 @@
-import { EggAppConfig, PowerPartial } from 'egg';
+import {EggAppConfig, PowerPartial} from 'egg';
 
 export interface Config {
     name: string;
@@ -37,6 +37,14 @@ export default () => {
             '.nj': 'nunjucks',
             '.html': 'nunjucks'
         }
+    };
+
+    config.mongoose = {
+        url: 'mongodb://127.0.0.1:27017/todo',
+        options: {
+            useUnifiedTopology: true,
+            useCreateIndex: true
+        },
     };
 
     return config;

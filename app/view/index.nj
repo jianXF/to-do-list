@@ -17,6 +17,5 @@
 </head>
 <body>
 <div id="app"></div>
-<script type="text/javascript" src="/public/dist/main.js"></script>
 </body>
 </html>

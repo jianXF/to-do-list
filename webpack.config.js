@@ -7,7 +7,7 @@ const autoprefixer = require('autoprefixer');
 const PostCSSOptions = {
     plugins: () => [
         autoprefixer({
-            browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4']
+            overrideBrowserslist: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 8', 'iOS >= 8', 'Android >= 4']
         })
     ]
 };
@@ -18,14 +18,6 @@ module.exports = {
         publicPath: '/public/dist/',
         filename: '[name].js',
         chunkFilename: '[id].js'
-    },
-    resolve: {
-        extensions: [".ts", ".tsx", ".js", ".json", ".less", ".css"],
-        modules: [
-            'node_modules',
-            path.join(__dirname, 'app/web'),
-            path.join(__dirname, 'app/')
-        ]
     },
     module: {
         rules: [
@@ -73,7 +65,7 @@ module.exports = {
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
-                use: ['url-loader']
+                use: 'url-loader'
             },
             {
                 test: /\.(eot|ttf|woff|woff2)$/,
@@ -81,7 +73,14 @@ module.exports = {
             }
         ]
     },
-
+    resolve: {
+        extensions: [".ts", ".tsx", ".js", ".json", ".less", ".css"],
+        modules: [
+            'node_modules',
+            path.join(__dirname, 'app/web'),
+            path.join(__dirname, 'app/')
+        ]
+    },
     plugins: [
         new MiniCssExtractPlugin({
             filename: '[name].css',
@@ -91,9 +90,9 @@ module.exports = {
             template: path.join(__dirname, 'app/view/index.nj'),
             filename: path.join(__dirname, 'app/view/index.html'),
             minify: {
+                removeComments: true,
                 collapseWhitespace: true
-            },
-            chunks: ['index']
+            }
         })
     ]
 };
