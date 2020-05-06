@@ -30,7 +30,7 @@ export default class ListService extends Service {
         is_completed: string;
     }) {
         const {uuid, is_completed} = values;
-        return await this.ctx.model.List.update({uuid},
+        return await this.ctx.model.List.updateOne({uuid},
             {
                 create_time: new Date().getTime(),
                 is_completed

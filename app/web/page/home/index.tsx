@@ -19,27 +19,28 @@ export default class Home extends React.Component<any, any> {
         this.initData();
     }
 
-// 初始化
+    // 初始化
     initData = async () => {
         const {type} = this.state;
         let {data, total} = await Api.list.find({is_completed: type});
         total = !type ? data.filter((d: { [key: string]: any }) => d.is_completed !== '1').length : total;
         this.setState({dataList: data, total: total})
     }
-// 创建事件
+    // 创建事件
     handlerCreate = async (content: string) => {
         await Api.list.add({content});
         this.initData();
     }
-// 修改事件
+    // 修改事件
     handlerUpdate = async (uuid: string, value: '0' | '1') => {
         await Api.list.update({uuid, is_completed: value});
         this.initData();
     }
-// 修改查询条件
+    // 修改查询条件
     changeType = (type: string) => {
         this.setState({type}, this.initData);
     }
+    // 删除事件
     onClear = async (uuid?: string) => {
         await Api.list.del({uuid});
         this.initData();
@@ -82,7 +83,6 @@ export function Header(props: any) {
     </div>)
 }
 
-// 列表渲染
 interface iList {
     data: Array<{ [key: string]: any }>;
     onChange: Function;

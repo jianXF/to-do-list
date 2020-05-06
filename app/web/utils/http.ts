@@ -80,29 +80,6 @@ export class Http {
     };
 
     /**
-     * PUT请求方法
-     */
-    put = (uri: string, data: { [key: string]: any } = {}) => {
-        return this.fetch(`/${this.prefix}${uri}`, this.addCsrfToken({
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this.trim(data))
-        }));
-    };
-
-    /**
-     * DELETE请求方法
-     */
-    del = (uri: string, query: { [key: string]: any } = {}) => {
-        const qs = Object.entries(this.trim(query)).map(([k, v]) => `${k}=${v}`).join('&');
-        return this.fetch(`/${this.prefix}${uri}${qs ? `?${qs}` : ''}`, this.addCsrfToken({
-            method: 'DELETE'
-        }));
-    };
-
-    /**
      * 请求方法
      */
     fetch = async (uri: string, init: { [key: string]: any } = {}) => {

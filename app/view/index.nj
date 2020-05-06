@@ -6,14 +6,9 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
     <title>{{title}}</title>
-    <meta name="Keywords" Content="keywords"/>
-    <meta name="Description" Content="description">
-    <meta property="og:type" content="website" >
-      <meta property="og:title" Content="werwer">
-      <meta property="og:description" Content="description">
-      <meta property="og:image" content=""/>
-      <meta property="og:url" content="">
-      <link rel='icon' href="">
+    <meta name="Keywords" Content="todo-list">
+    <meta name="Description" Content="todo-list">
+    <link rel='icon' href="">
 </head>
 <body>
 <div id="app"></div>
