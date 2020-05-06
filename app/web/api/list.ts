@@ -11,7 +11,9 @@ export default class ListApi {
         is_completed: string;
     }) => Request.post('/list/update', values);
     // 删除事件
-    del = () => Request.post('/list/del');
+    del = (values: {
+        uuid: string;
+    }) => Request.post('/list/del', values);
     // 查找事件
     find = (values: {
         is_completed: string;

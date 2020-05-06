@@ -62,6 +62,10 @@ export default class ListService extends Service {
         content && (sql.content = {'$regex': new RegExp(content, 'i')});
         is_completed && (sql.is_completed = is_completed);
         uuid && (sql.uuid = {'$in': typeof uuid === 'string' ? [uuid] : uuid});
-        return await this.ctx.model.List.find(sql);
+        const data = await this.ctx.model.List.find(sql);
+        return {
+            data,
+            total: data.length
+        };
     }
 }

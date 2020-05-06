@@ -1,5 +1,7 @@
 @black: #ffffff;
 @primary: #E8E8E8;
+@second: #5D5B5B;
+@primary_hover: #777777;
 
 html, body, #app {
   height: 100%;
@@ -43,10 +45,13 @@ html, body, #app {
 .wb-list {
   background-color: @black;
   border-top: 1px solid @primary;
+  max-height: 324px;
+  overflow: auto;
+  color: @second;
   li {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid #E8E8E8;
+    border-bottom: 1px solid @primary;
     padding: 6px 10px;
     & > p {
       display: flex;
@@ -68,22 +73,63 @@ html, body, #app {
       font-size: 16px;
       color: #ADADAD;
     }
-
+    .delete {
+      font-size: 20px;
+      cursor: pointer;
+      animation: 0.5s;
+      margin-left: 10px;
+      &:hover {
+        color: black;
+      }
+    }
     &.completed {
       .icon {
+        position: relative;
         &:after {
           content: '√';
           width: 100%;
           height: 100%;
+          display: block;
           top: 0;
-          left: 0;
-          font-size: 20px;
+          left: 2px;
+          position: absolute;
+          font-size: 16px;
+          color: #2F964B;
         }
       }
       .text {
         text-decoration: line-through;
         color: @primary;
       }
+    }
+  }
+}
+
+.web-setting {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  color: @second;
+  background-color: @black;
+  ul {
+    display: flex;
+  }
+  li {
+    margin: 0 8px;
+    border: 1px solid @black;
+    padding: 2px;
+    border-radius: 2px;
+    animation: 0.5s;
+    cursor: pointer;
+    &.selected, &:hover {
+      border: 1px solid @second;
+      box-shadow: 1px 2px 5px 0px rgba(93, 91, 91, 0.77);
+    }
+  }
+  .clear {
+    cursor: pointer;
+    &:hover {
+      color: @primary_hover;
     }
   }
 }

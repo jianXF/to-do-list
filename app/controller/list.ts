@@ -26,7 +26,8 @@ export default class ListController extends BaseController {
      */
     @BaseController.stdOutput
     async del() {
-        await this.ctx.service.list.delete();
+        const {uuid} = this.ctx.request.body;
+        await this.ctx.service.list.delete(uuid);
     }
 
     /**
@@ -35,9 +36,11 @@ export default class ListController extends BaseController {
      */
     @BaseController.stdOutput
     async find() {
-        console.log(this.ctx.validParams);
         const {uuid, is_completed, content} = this.ctx.request.query;
-        const data = await this.ctx.service.list.find({uuid, is_completed, content});
-        this.ctx.body = data;
+        const {data, total} = await this.ctx.service.list.find({uuid, is_completed, content});
+        this.ctx.body = {
+            data,
+            total
+        };
     }
 }
