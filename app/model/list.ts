@@ -1,6 +1,6 @@
 import {Application} from 'egg';
 
-module.exports = (app: Application) => {
+export default (app: Application) => {
     const mongoose = app.mongoose;
     const Schema = mongoose.Schema;
 

@@ -74,6 +74,7 @@ module.exports = {
             minify: {
                 removeComments: true,
                 collapseWhitespace: true
+
             }
         })
     ]

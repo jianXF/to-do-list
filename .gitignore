@@ -3,3 +3,6 @@
 
 # dependencies
 node_modules/
+
+app/public/dist
+app/view/**/*.html

@@ -8,7 +8,9 @@
   "scripts": {
     "build:dev": "webpack --mode development -w",
     "start:dev": "egg-bin dev -r egg-ts-helper/register",
-    "build": "webpack --mode production"
+    "compile": "tsc -p tsconfig.json",
+    "build": "webpack --mode production",
+    "start": "egg-scripts start --port=8080 --daemon --title=todo-list"
   },
   "repository": {
     "type": "git",
@@ -24,8 +26,9 @@
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "egg": "^2.26.0",
-    "egg-view-nunjucks": "^2.2.0",
     "egg-mongoose": "^3.2.0",
+    "egg-scripts": "^2.13.0",
+    "egg-view-nunjucks": "^2.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
